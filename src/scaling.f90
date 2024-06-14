@@ -1189,7 +1189,7 @@ contains
       if (jperm(j) .ne. 0) cycle
       k = k + 1
       jdum = int(out(k))
-      iperm(jdum) = -j
+      iperm(jdum) = 0
    end do
  end subroutine hungarian_match
 
