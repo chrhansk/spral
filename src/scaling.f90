@@ -1189,7 +1189,7 @@ contains
       if (jperm(j) .ne. 0) cycle
       k = k + 1
       jdum = int(out(k))
-      iperm(jdum) = 0
+      iperm(jdum) = -j
    end do
  end subroutine hungarian_match
 
@@ -1619,7 +1619,7 @@ contains
    real(wp), dimension(m), intent(inout) :: rscaling
    real(wp), dimension(n), intent(inout) :: cscaling
    integer, intent(in) :: nmatch
-   integer, dimension(m), intent(in) :: match
+   integer, dimension(m), intent(inout) :: match
    integer, intent(inout) :: flag
    integer, intent(inout) :: st
 
@@ -1627,6 +1627,13 @@ contains
    integer(long) :: jlong
    real(wp), dimension(:), allocatable :: rmax, cmax
    real(wp) :: ravg, cavg, adjust, colmax, v
+
+   ! Zero out negative matching entries for
+   ! structurally singular matrices
+   do i = 1, m
+      if (match(i) .gt. 0) cycle
+      match(i) = 0
+   end do
 
    if (m .eq. n) then
       ! Square
