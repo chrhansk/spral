@@ -613,7 +613,7 @@ subroutine test_hungarian_unsym_singular
 
   write(*, "(a)")
   write(*, "(a)") "===================================================="
-  write(*, "(a)") "Testing equilib_scaling_unsym() with singular matrix"
+  write(*, "(a)") "Testing hungarian_scale_unsym() with singular matrix"
   write(*, "(a)") "===================================================="
 
   allocate(a%ptr(n+1))
