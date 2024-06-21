@@ -664,6 +664,10 @@ contains
     end if
 
     if (inform%matched .ne. min(m,n)) then
+       ! Zero out negative matching entries for
+       ! structurally singular matrices
+       where (match(1:m) .lt. 0) match(1:m) = 0
+
        ! Singular matrix
        if (options%scale_if_singular) then
           ! Just issue warning then continue
@@ -1619,7 +1623,7 @@ contains
    real(wp), dimension(m), intent(inout) :: rscaling
    real(wp), dimension(n), intent(inout) :: cscaling
    integer, intent(in) :: nmatch
-   integer, dimension(m), intent(inout) :: match
+   integer, dimension(m), intent(in) :: match
    integer, intent(inout) :: flag
    integer, intent(inout) :: st
 
@@ -1627,13 +1631,6 @@ contains
    integer(long) :: jlong
    real(wp), dimension(:), allocatable :: rmax, cmax
    real(wp) :: ravg, cavg, adjust, colmax, v
-
-   ! Zero out negative matching entries for
-   ! structurally singular matrices
-   do i = 1, m
-      if (match(i) .gt. 0) cycle
-      match(i) = 0
-   end do
 
    if (m .eq. n) then
       ! Square
