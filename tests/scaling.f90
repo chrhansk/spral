@@ -618,7 +618,7 @@ subroutine test_hungarian_unsym_singular
 
   allocate(a%ptr(n+1))
   allocate(a%row(nz), a%val(nz))
-  allocate(rscaling(m), cscaling(n), match(n))
+  allocate(rscaling(m), cscaling(n), match(m))
 
   ! Produce warning rather than error
   options%scale_if_singular = .true.
