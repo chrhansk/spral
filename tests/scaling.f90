@@ -626,7 +626,7 @@ subroutine test_hungarian_unsym_singular
   a%n = n
   a%m = m
 
-  a%ptr(1:n+1)          = (/   1,   3,   5,   5,   5,   7 /)
+  a%ptr(1:n+1)          = (/   1,   3,   5,   6,   6,   7 /)
   a%row(1:a%ptr(n+1)-1) = (/   1,   2,   1,   2,   2,   2 /)
   a%val(1:a%ptr(n+1)-1) = (/ 2.0, 1.0, 1.0, 4.0, 1.0, 1.0 /)
 
